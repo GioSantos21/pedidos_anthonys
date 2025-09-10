@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('modulos.users.Ingresar');
 });
 
+Route::get('/Inicio', function () {
+    return view('modulos.Inicio');
+});
+
 Route::get('Primer-Usuario',[UsuariosController::class, 'PrimerUsusario']);
 
 Auth::routes();
