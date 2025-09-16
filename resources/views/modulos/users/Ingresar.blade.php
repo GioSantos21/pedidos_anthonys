@@ -28,7 +28,7 @@
 
 <div class="login-box">
   <div class="login-logo">
-    <img src="{{ url('storage/plantilla/logo-blanco-bloque2.png') }}" class="img-responsive" >
+    <img src="{{ url('storage/plantilla/logo-blanco-bloque2.png') }}" class="img-responsive" style="padding: 100px 0px 0px 0px;" >
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

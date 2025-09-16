@@ -25,11 +25,28 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'email' => 'admin@gmail.com',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'foto' => fake()->imageUrl(),
+            'ultimo_login' => now(),
+            'status' => 'Activo',
+            'rol' => 'Administrador',
+            'cod_sucursal' => '1',
+
+
         ];
+    }
+
+    public function admin():static
+    {
+        return $this->state(fn (array $attributes) => [
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123'),
+            'status' => 'Activo',
+            'rol' => 'Encargado',
+        ]);
     }
 
     /**

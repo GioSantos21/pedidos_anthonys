@@ -18,6 +18,15 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->text('foto');
+            $table->string('ultimo_login');
+            $table->enum('status',['Activo', 'Inactivo'])->default('Activo');
+            $table->enum('rol',['Administrador','Encargado']);
+            $table->string('cod_sucursal');
+            $table->foreign('cod_sucursal')
+                ->references('cod_sucursal')
+                ->on('sucursales')
+                ->onDelete('cascade');
             $table->timestamps();
         });
 
