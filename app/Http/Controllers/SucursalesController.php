@@ -18,7 +18,11 @@ class SucursalesController extends Controller
      */
     public function index()
     {
-        return view('modulos.users.Sucursales');
+        if(auth()->user()->rol != 'Administrador') {
+            return redirect('Inicio');
+        }
+        $sucursales = Sucursales::all();
+        return view('modulos.users.Sucursales', compact('sucursales'));
     }
 
 

@@ -12,7 +12,27 @@
                     <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarSucursal">Agregar Sucursal</button>
                 </div>
                 <div class="box-body">
-
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>codigo Sucursal</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ( $sucursales as $sucursal )
+                                <tr>
+                                    <td> {{ $sucursal->id }}</td>
+                                    <td> {{ $sucursal->cod_sucursal }}</td>
+                                    <td> {{ $sucursal->name }}</td>
+                                    <td> {{ $sucursal->status }}</td>
+                                    <td> </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
