@@ -52,38 +52,35 @@ class SucursalesController extends Controller
             'status' => 'Activo'
         ]);
 
-        return redirect('Sucursales');
+        return redirect('Sucursales')->with('success','La sucursal se agrego correctamente');
         }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Sucursales $sucursales)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sucursales $sucursales)
+    public function edit($cod_sucursal)
     {
-        //
+        $sucursal = Sucursales::find($cod_sucursal);
+        return response()->json($sucursal);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sucursales $sucursales)
+    public function update(Request $request)
     {
-        //
+        Sucursales::where('id', $request->id)->update(['name'=>$request->name]);
+        return redirect('Sucursales')->with('success', 'La sucursal ha sido actualizada con exito');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sucursales $sucursales)
+    public function CambiarEstado($status, $cod_sucursal)
     {
-        //
+        Sucursales::find($cod_sucursal)->update(['status'=>$status]);
+
+        return redirect('Sucursales');
     }
 }

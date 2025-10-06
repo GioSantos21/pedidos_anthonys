@@ -18,4 +18,7 @@ Auth::routes();
 
 Route::get('Sucursales', [SucursalesController::class, 'index']);
 Route::post('Sucursales',[SucursalesController::class, 'store']);
+Route::get('Editar-Sucursal/{cod_sucursal}',[SucursalesController::class, 'edit']);
+Route::put('Actualizar-Sucursal', [SucursalesController::class, 'update']);
+Route::get('Cambiar-Estado-Sucursal/{status}/{cod_sucursal}',[SucursalesController::class, 'CambiarEstado']);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
