@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->text('foto');
-            $table->string('ultimo_login');
+            $table->string('ultimo_login')->nullable();
             $table->enum('status',['Activo', 'Inactivo'])->default('Activo');
-            $table->enum('rol',['Administrador','Encargado']);
+            $table->enum('rol',['Administrador','Encargado','Cajero']);
             $table->string('cod_sucursal');
             $table->foreign('cod_sucursal')
                 ->references('cod_sucursal')

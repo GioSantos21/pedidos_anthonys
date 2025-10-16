@@ -13,10 +13,27 @@ class SucursalSeeder extends Seeder
      */
     public function run(): void
     {
-        Sucursales::create([
-            'cod_sucursal' => '1',
-            'name' => 'matriz',
-            'status' => 'Activo',
-        ]);
+         $sucursales = [
+            [
+                'cod_sucursal' => '1',
+                'name' => 'Matriz Principal',
+                'status' => 'Activo',
+            ],
+            [
+                'cod_sucursal' => '002',
+                'name' => 'Terminal',
+                'status' => 'Activo',
+            ],
+            [
+                'cod_sucursal' => '003',
+                'name' => 'Metro',
+                'status' => 'Inactivo',
+            ],
+        ];
+
+        foreach ($sucursales as $sucursal) {
+            Sucursales::create($sucursal);
+        }
+
     }
 }

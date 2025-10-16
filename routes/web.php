@@ -16,9 +16,19 @@ Route::get('/Inicio', function () {
 
 Auth::routes();
 
+//Sucursales
 Route::get('Sucursales', [SucursalesController::class, 'index']);
 Route::post('Sucursales',[SucursalesController::class, 'store']);
 Route::get('Editar-Sucursal/{cod_sucursal}',[SucursalesController::class, 'edit']);
 Route::put('Actualizar-Sucursal', [SucursalesController::class, 'update']);
 Route::get('Cambiar-Estado-Sucursal/{status}/{cod_sucursal}',[SucursalesController::class, 'CambiarEstado']);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//Usuarios
+Route::get('Mis-Datos', function(){
+    return view('modulos.users.Mis-Datos');
+});
+Route::post('Mis-Datos',[UsuariosController::class, 'ActualizarMisDatos']);
+Route::get('Usuarios', [UsuariosController::class, 'index']);
+Route::post('Usuarios', [UsuariosController::class, 'store']);

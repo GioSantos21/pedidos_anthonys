@@ -107,6 +107,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="{{ url('js/plantilla.js') }}"></script>
+<script src="{{ url('js/usuarios.js') }}"></script>
 
 @if (@session('success'))
 

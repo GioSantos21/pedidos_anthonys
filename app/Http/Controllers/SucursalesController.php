@@ -32,17 +32,25 @@ class SucursalesController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. Obtener la abreviatura del nombre de la sucursal
-        $abreviatura = strtoupper(substr($request->name, 0, 3));
+        // 1. Obtener la abreviatura del nombre de la sucursal (ej: "Matriz" -> "Mat")
+        $abreviatura = ucfirst(strtolower(substr($request->name, 0, 5)));
 
-        // 2. Obtener el último ID auto-incrementado para el correlativo
-        $lastSucursal = Sucursales::latest('id')->first();
-        $correlativo = 1;
-        if ($lastSucursal) {
-            $correlativo = $lastSucursal->id + 1;
-        }
+        // 2. Lógica Clave: Obtener el correlativo basado en la abreviatura existente
+
+        // Patrón a buscar: 'Suc-Mat-%' (para Matriz)
+        $searchPattern = 'Suc-' . $abreviatura . '-%';
+
+        // Contar cuántas sucursales existen con esa abreviatura.
+        // El nuevo correlativo será el conteo existente + 1.
+        $count = Sucursales::where('cod_sucursal', 'like', $searchPattern)->count();
+
+        // Si es la primera vez (count=0), el correlativo es 1.
+        // Si ya existen 2 (count=2), el nuevo correlativo es 3.
+        $correlativo = $count + 1;
+
 
         // 3. Juntar las partes para el nuevo código de sucursal
+        // Ejemplo: Suc-Mat-1 o Suc-Met-2
         $newCodSucursal = 'Suc' . '-' . $abreviatura . '-' . $correlativo;
 
         // 4. Crear la sucursal en la base de datos
@@ -54,6 +62,7 @@ class SucursalesController extends Controller
 
         return redirect('Sucursales')->with('success','La sucursal se agrego correctamente');
         }
+
 
 
     /**

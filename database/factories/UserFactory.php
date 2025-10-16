@@ -25,29 +25,50 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => 'admin@gmail.com',
+            'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'foto' => fake()->imageUrl(),
             'ultimo_login' => now(),
-            'status' => 'Activo',
-            'rol' => 'Administrador',
-            'cod_sucursal' => '1',
+            'status' => fake()->randomElement(['Activo', 'Inactivo']),
+            'rol' => fake()->randomElement(['Administrador', 'Encargado', 'Cajero']),
+            'cod_sucursal' => fake()->randomElement(['1','002','003']),
 
 
         ];
     }
 
-    public function admin():static
-    {
-        return $this->state(fn (array $attributes) => [
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123'),
-            'status' => 'Activo',
-            'rol' => 'Encargado',
-        ]);
-    }
+        public function administrador(): static
+        {
+            return $this->state(fn (array $attributes) => [
+                'name' => 'Admin Global',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('123'),
+                'status' => 'Activo',
+                'rol' => 'Administrador',
+                'cod_sucursal' => '1',
+            ]);
+        }
+
+        // Nuevo estado para Encargado
+        public function encargado(): static
+        {
+            return $this->state(fn (array $attributes) => [
+                'rol' => 'Encargado',
+                // Asegura que los encargados obtengan un correo único
+                'email' => fake()->unique()->safeEmail(),
+            ]);
+        }
+
+        // Nuevo estado para Cajero
+        public function cajero(): static
+        {
+            return $this->state(fn (array $attributes) => [
+                'rol' => 'Cajero',
+                // Asegura que los cajeros obtengan un correo único
+                'email' => fake()->unique()->safeEmail(),
+            ]);
+        }
 
     /**
      * Indicate that the model's email address should be unverified.
